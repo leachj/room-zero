@@ -23,8 +23,8 @@ func interact() -> void:
 	
 	var tween := create_tween().set_parallel(true)
 	if left_pivot:
-		tween.tween_property(left_pivot, "rotation_degrees:z", 160.0, 0.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+		tween.tween_property(left_pivot, "rotation_degrees:z", -160.0, 0.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	if right_pivot:
-		tween.tween_property(right_pivot, "rotation_degrees:z", -160.0, 0.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+		tween.tween_property(right_pivot, "rotation_degrees:z", 160.0, 0.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	
 	super.interact()

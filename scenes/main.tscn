@@ -221,7 +221,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("12")
 
 [node name="Book" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1921159710]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.79, 2)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 0.79, 2)
 collision_layer = 2
 script = ExtResource("3")
 note_item = ExtResource("10")
