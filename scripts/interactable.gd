@@ -32,9 +32,9 @@ func highlight() -> void:
 	_is_highlighted = true
 	for child in get_children():
 		if child is MeshInstance3D:
-			var mat := child.get_surface_override_material(0)
-			if mat is StandardMaterial3D:
-				mat = mat.duplicate()
+			var base_mat = child.get_surface_override_material(0)
+			if base_mat is StandardMaterial3D:
+				var mat: StandardMaterial3D = base_mat.duplicate()
 				mat.emission_enabled = true
 				mat.emission = highlight_color
 				mat.emission_energy_multiplier = 0.3
