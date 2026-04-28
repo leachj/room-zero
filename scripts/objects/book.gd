@@ -9,6 +9,7 @@ var _revealed: bool = false
 func _ready() -> void:
 	super._ready()
 	prompt_text = "Look at book"
+	print("[Book] Ready! collision_layer=", collision_layer, " position=", global_position)
 
 
 func interact() -> void:
