@@ -4,7 +4,7 @@ extends CharacterBody3D
 
 @export var move_speed: float = 4.0
 @export var arrival_distance: float = 0.15
-@export var interact_range: float = 1.0
+@export var interact_range: float = 2.0
 
 var _target_position: Vector3
 var _is_moving: bool = false
@@ -53,10 +53,10 @@ func _handle_click(event: InputEventMouseButton) -> void:
 		if _is_within_range(target):
 			_do_interact(target)
 		else:
-			# Walk to the object, then interact on arrival
+			# Walk right up to the object, then interact on arrival
 			_pending_interactable = target
 			var dir := (global_position - target.global_position).normalized()
-			_target_position = target.global_position + dir * (interact_range * 0.7)
+			_target_position = target.global_position + dir * 0.8
 			_target_position.y = global_position.y
 			navigation_agent.target_position = _target_position
 			_is_moving = true
