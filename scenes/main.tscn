@@ -59,6 +59,9 @@ size = Vector3(1.2, 0.8, 0.8)
 [sub_resource type="StandardMaterial3D" id="13"]
 albedo_color = Color(0.6, 0.15, 0.15, 1)
 
+[sub_resource type="StandardMaterial3D" id="22"]
+albedo_color = Color(0.95, 0.93, 0.88, 1)
+
 [sub_resource type="BoxShape3D" id="14"]
 size = Vector3(0.6, 0.5, 0.5)
 
@@ -84,9 +87,6 @@ albedo_color = Color(0.4, 0.25, 0.15, 1)
 
 [sub_resource type="BoxShape3D" id="21"]
 size = Vector3(0.12, 2.2, 1)
-
-[sub_resource type="StandardMaterial3D" id="22"]
-albedo_color = Color(0.95, 0.93, 0.88, 1)
 
 [node name="Main" type="Node3D" unique_id=129865776 groups=["game_manager"]]
 script = ExtResource("1")
@@ -226,31 +226,23 @@ collision_layer = 2
 script = ExtResource("3")
 note_item = ExtResource("10")
 
-[node name="Spine" type="CSGBox3D" parent="NavigationRegion3D/Book"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425, -0.022, -0.03)
-size = Vector3(0.02, 0.06, 0.2)
-material = SubResource("13")
-
-[node name="LeftCoverPivot" type="Node3D" parent="NavigationRegion3D/Book"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.415, -0.022, -0.03)
-
-[node name="Cover" type="CSGBox3D" parent="NavigationRegion3D/Book/LeftCoverPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07, 0, 0)
-size = Vector3(0.14, 0.06, 0.2)
-material = SubResource("13")
-
-[node name="RightCoverPivot" type="Node3D" parent="NavigationRegion3D/Book"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.435, -0.022, -0.03)
-
-[node name="Cover" type="CSGBox3D" parent="NavigationRegion3D/Book/RightCoverPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07, 0, 0)
-size = Vector3(0.14, 0.06, 0.2)
+[node name="BottomCover" type="CSGBox3D" parent="NavigationRegion3D/Book"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425, -0.05, -0.03)
+size = Vector3(0.3, 0.015, 0.2)
 material = SubResource("13")
 
 [node name="Pages" type="CSGBox3D" parent="NavigationRegion3D/Book"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425, -0.025, -0.03)
-size = Vector3(0.26, 0.04, 0.18)
+size = Vector3(0.28, 0.04, 0.18)
 material = SubResource("22")
+
+[node name="LeftCoverPivot" type="Node3D" parent="NavigationRegion3D/Book"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275, -0.005, -0.03)
+
+[node name="Cover" type="CSGBox3D" parent="NavigationRegion3D/Book/LeftCoverPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075, 0, 0)
+size = Vector3(0.3, 0.015, 0.2)
+material = SubResource("13")
 
 [node name="BookCollision" type="CollisionShape3D" parent="NavigationRegion3D/Book" unique_id=393765923]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42525172, -0.02194941, -0.03025341)

@@ -5,7 +5,7 @@ extends Camera3D
 @export var pan_speed: float = 0.02
 @export var zoom_speed: float = 0.5
 @export var min_zoom: float = 4.0
-@export var max_zoom: float = 16.0
+@export var max_zoom: float = 32.0
 
 var _is_dragging: bool = false
 var _drag_start: Vector2 = Vector2.ZERO
