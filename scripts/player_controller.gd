@@ -48,6 +48,11 @@ func _handle_click(event: InputEventMouseButton) -> void:
 	
 	# Priority 1: Check for interactable
 	var interact_result := _raycast_from_screen(event.position, 2)
+	if interact_result:
+		print("[Click] Hit: ", interact_result.collider.name, " is Interactable: ", interact_result.collider is Interactable)
+	else:
+		print("[Click] Raycast layer 2 hit nothing at ", event.position)
+	
 	if interact_result and interact_result.collider is Interactable:
 		var target: Interactable = interact_result.collider
 		if _is_within_range(target):
@@ -98,6 +103,8 @@ func _raycast_from_screen(screen_pos: Vector2, layer_mask: int) -> Dictionary:
 	var query := PhysicsRayQueryParameters3D.create(from, to)
 	query.collision_mask = layer_mask
 	query.collide_with_areas = false
+	query.collide_with_bodies = true
+	query.exclude = [get_rid()]
 	
 	var space_state := get_world_3d().direct_space_state
 	return space_state.intersect_ray(query)
