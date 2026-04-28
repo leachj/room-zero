@@ -4,10 +4,12 @@ extends CharacterBody3D
 
 @export var move_speed: float = 4.0
 @export var arrival_distance: float = 0.15
+@export var interact_range: float = 2.0
 
 var _target_position: Vector3
 var _is_moving: bool = false
 var _hovered_interactable: Interactable = null
+var _pending_interactable: Interactable = null
 var _camera: Camera3D
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
@@ -48,18 +50,22 @@ func _handle_click(event: InputEventMouseButton) -> void:
 	var interact_result := _raycast_from_screen(event.position, 2)
 	if interact_result and interact_result.collider is Interactable:
 		var target: Interactable = interact_result.collider
-		var selected := Inventory.get_selected()
-		if selected:
-			if target.use_item(selected):
-				Inventory.remove_item(selected)
-			Inventory.deselect()
+		if _is_within_range(target):
+			_do_interact(target)
 		else:
-			target.interact()
+			# Walk to the object, then interact on arrival
+			_pending_interactable = target
+			var dir := (global_position - target.global_position).normalized()
+			_target_position = target.global_position + dir * (interact_range * 0.7)
+			_target_position.y = global_position.y
+			navigation_agent.target_position = _target_position
+			_is_moving = true
 		return
 	
 	# Priority 2: Move to floor position
 	var floor_result := _raycast_from_screen(event.position, 4)  # floor layer (bit 3)
 	if floor_result:
+		_pending_interactable = null
 		_target_position = floor_result.position
 		navigation_agent.target_position = _target_position
 		_is_moving = true
@@ -72,6 +78,9 @@ func _physics_process(delta: float) -> void:
 	if navigation_agent.is_navigation_finished():
 		_is_moving = false
 		velocity = Vector3.ZERO
+		if _pending_interactable and _is_within_range(_pending_interactable):
+			_do_interact(_pending_interactable)
+			_pending_interactable = null
 		return
 	
 	var next_pos := navigation_agent.get_next_path_position()
@@ -92,3 +101,18 @@ func _raycast_from_screen(screen_pos: Vector2, layer_mask: int) -> Dictionary:
 	
 	var space_state := get_world_3d().direct_space_state
 	return space_state.intersect_ray(query)
+
+
+func _is_within_range(target: Node3D) -> bool:
+	var dist := global_position.distance_to(target.global_position)
+	return dist <= interact_range
+
+
+func _do_interact(target: Interactable) -> void:
+	var selected := Inventory.get_selected()
+	if selected:
+		if target.use_item(selected):
+			Inventory.remove_item(selected)
+		Inventory.deselect()
+	else:
+		target.interact()
