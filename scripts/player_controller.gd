@@ -4,7 +4,7 @@ extends CharacterBody3D
 
 @export var move_speed: float = 4.0
 @export var arrival_distance: float = 0.15
-@export var interact_range: float = 2.0
+@export var interact_range: float = 1.0
 
 var _target_position: Vector3
 var _is_moving: bool = false
