@@ -48,16 +48,6 @@ func _handle_click(event: InputEventMouseButton) -> void:
 	
 	# Priority 1: Check for interactable
 	var interact_result := _raycast_from_screen(event.position, 2)
-	if interact_result:
-		print("[Click] Hit on layer 2: ", interact_result.collider.name, " is Interactable: ", interact_result.collider is Interactable)
-	else:
-		# Debug: try ALL layers to see what's there
-		var debug_result := _raycast_from_screen(event.position, 0xFFFFFFFF)
-		if debug_result:
-			print("[Click] Layer 2 missed, but ALL-layer hit: ", debug_result.collider.name, " layer: ", debug_result.collider.collision_layer)
-		else:
-			print("[Click] Nothing hit on ANY layer at ", event.position)
-	
 	if interact_result and interact_result.collider is Interactable:
 		var target: Interactable = interact_result.collider
 		if _is_within_range(target):

@@ -229,6 +229,7 @@ size = Vector3(0.3, 0.06, 0.2)
 material = SubResource("13")
 
 [node name="BookCollision" type="CollisionShape3D" parent="NavigationRegion3D/Book" unique_id=393765923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42525172, -0.02194941, -0.03025341)
 shape = SubResource("14")
 
 [node name="DrawerUnit" type="StaticBody3D" parent="NavigationRegion3D" unique_id=216747466]
