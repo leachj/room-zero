@@ -17,9 +17,8 @@ func interact() -> void:
 	_revealed = true
 	GameState.set_state("note_found", true)
 	
-	# Animate book moving aside
+	# Animate book opening (rotate cover upward like opening a book)
 	var tween := create_tween()
-	tween.tween_property(self, "position:x", position.x + 0.3, 0.4).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "rotation_degrees:z", -15.0, 0.3)
+	tween.tween_property(self, "rotation_degrees:x", -120.0, 0.6).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	
 	super.interact()
