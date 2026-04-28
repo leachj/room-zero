@@ -17,8 +17,14 @@ func interact() -> void:
 	_revealed = true
 	GameState.set_state("note_found", true)
 	
-	# Animate book opening (rotate cover upward like opening a book)
-	var tween := create_tween()
-	tween.tween_property(self, "rotation_degrees:x", -120.0, 0.6).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	# Open both covers outward from the spine
+	var left_pivot := get_node_or_null("LeftCoverPivot")
+	var right_pivot := get_node_or_null("RightCoverPivot")
+	
+	var tween := create_tween().set_parallel(true)
+	if left_pivot:
+		tween.tween_property(left_pivot, "rotation_degrees:z", 160.0, 0.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	if right_pivot:
+		tween.tween_property(right_pivot, "rotation_degrees:z", -160.0, 0.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	
 	super.interact()
