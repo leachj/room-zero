@@ -266,7 +266,7 @@ material = SubResource("17")
 [node name="DrawerCollision" type="CollisionShape3D" parent="NavigationRegion3D/Drawer"]
 shape = SubResource("18")
 
-[node name="Safe" type="StaticBody3D" parent="NavigationRegion3D"]
+[node name="Safe" type="StaticBody3D" parent="NavigationRegion3D" groups=["safe"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0.5)
 collision_layer = 2
 script = ExtResource("5")
